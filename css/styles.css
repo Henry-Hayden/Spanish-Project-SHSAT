@@ -136,10 +136,10 @@ ul { list-style: none; }
 
 .nav__link {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.92rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--teal);
-  padding: 0.4rem 0.75rem;
+  padding: 0.4rem 0.6rem;
   border-radius: 4px;
   transition: background 0.15s;
   white-space: nowrap;
@@ -160,7 +160,7 @@ ul { list-style: none; }
 }
 
 /* Mobile nav */
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .nav__toggle { display: flex; align-items: center; }
 
   .nav__links {
@@ -815,4 +815,102 @@ a.school-detail-card:hover {
 @media (max-width: 480px) {
   html { font-size: 16px; }
   .checklist { padding: 1.5rem; }
+}
+
+/* ============================================================
+   TRANSIT INFO (escuelas.html)
+   ============================================================ */
+.transit-info {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--teal-light);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--teal);
+}
+
+.transit-info__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.transit-info p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  /* Hide everything interactive */
+  .nav,
+  .nav__toggle,
+  .footer,
+  .btn,
+  .school-nav-section,
+  .faq-icon,
+  .callout--coral { display: none !important; }
+
+  /* Reset colors for ink */
+  * { color: #000 !important; background: #fff !important;
+      box-shadow: none !important; border-color: #ccc !important; }
+
+  body { font-size: 12pt; line-height: 1.5; }
+
+  h1, h2, h3 { color: #000 !important; page-break-after: avoid; }
+
+  /* Show page header cleanly */
+  .page-header {
+    background: #fff !important;
+    border-bottom: 2pt solid #000;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+  }
+  .page-header h1 { color: #000 !important; font-size: 22pt; }
+  .page-header p  { color: #444 !important; }
+
+  /* Steps print clearly */
+  .step {
+    page-break-inside: avoid;
+    border: 1pt solid #ccc !important;
+    margin-bottom: 12pt;
+  }
+  .step__num {
+    background: #000 !important;
+    color: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Tables */
+  .dates-table th {
+    background: #eee !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Checklist */
+  .checklist__check { color: #000 !important; }
+
+  /* Show href after links */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666 !important;
+    word-break: break-all;
+  }
+
+  /* Keep callout text visible */
+  .callout--teal { border-left: 3pt solid #000 !important; }
+
+  /* Max width for print */
+  .container { max-width: 100%; padding: 0; }
+  .section   { padding: 1rem 0; }
 }

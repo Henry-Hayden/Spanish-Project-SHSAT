@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Las 8 Escuelas Especializadas — SHSAT: Tu Guía en Español</title>
   <meta name="description" content="Conoce en detalle las 8 escuelas secundarias especializadas de Nueva York: Stuyvesant, Bronx Science, Brooklyn Tech, y más." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="SHSAT: Tu Guía en Español" />
+  <meta property="og:title"       content="Las 8 Escuelas Especializadas de NYC — Guía en Español" />
+  <meta property="og:description" content="Fotos, descripciones, y cómo llegar a las 8 escuelas secundarias especializadas de Nueva York, explicadas en español." />
+  <meta property="og:image"       content="https://henry-hayden.github.io/Spanish-Project-SHSAT/images/stuyvesant.jpg" />
+  <meta property="og:url"         content="https://henry-hayden.github.io/Spanish-Project-SHSAT/escuelas.html" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
   <link rel="stylesheet" href="css/styles.css" />
   <style>
     /* ── School stage: full-viewport 50/50 split ── */
@@ -212,6 +220,7 @@
         <li><a href="como-registrarse.html" class="nav__link">Cómo Registrarse</a></li>
         <li><a href="recursos.html"         class="nav__link">Recursos Gratuitos</a></li>
         <li><a href="faq.html"              class="nav__link">Preguntas Frecuentes</a></li>
+        <li><a href="glosario.html"         class="nav__link">Glosario</a></li>
       </ul>
     </div>
   </nav>
@@ -225,7 +234,11 @@
       <span class="borough" id="school-borough"></span>
       <h1 id="school-name"></h1>
       <div class="school-info-desc" id="school-desc"></div>
-      <a id="school-doe-link" href="#" target="_blank" rel="noopener noreferrer" class="school-doe-link">
+      <div class="transit-info" id="school-transit">
+        <span class="transit-info__label">🚇 Cómo llegar</span>
+        <p id="school-transit-text"></p>
+      </div>
+      <a id="school-doe-link" href="#" target="_blank" rel="noopener noreferrer" class="school-doe-link" style="margin-top:1.25rem;">
         Ver en el sitio del DOE &rarr;
       </a>
     </div>
@@ -256,6 +269,7 @@
             <li><a href="como-registrarse.html">Cómo Registrarse</a></li>
             <li><a href="recursos.html">Recursos Gratuitos</a></li>
             <li><a href="faq.html">Preguntas Frecuentes</a></li>
+            <li><a href="glosario.html">Glosario</a></li>
           </ul>
         </div>
         <div class="footer__col">
@@ -286,6 +300,7 @@
         borough: 'Manhattan',
         image: 'images/stuyvesant.jpg',
         doe: 'https://www.schools.nyc.gov/schools/M475',
+        transit: 'Tren: 1 · 2 · 3 hasta Chambers St; A · C · E hasta Chambers St; R · W hasta Rector St\nBus: M20, M22',
         desc: [
           'La más competitiva de las ocho escuelas especializadas de Nueva York, Stuyvesant es reconocida mundialmente por sus programas de ciencias, matemáticas, y tecnología. Ha graduado a más de 14 ganadores del Premio Nobel — un número que supera al de muchas universidades del mundo.',
           'Cada año, el puntaje de corte de Stuyvesant es el más alto de todas las especializadas. Para los estudiantes que reciben una oferta, la escuela ofrece una experiencia académica sin igual: cientos de cursos Advanced Placement (AP), laboratorios de última generación, equipos de debate y olimpiadas matemáticas internacionales, y más de 200 clubes extracurriculares.',
@@ -300,6 +315,7 @@
         borough: 'El Bronx',
         image: 'images/bronx-science.jpg',
         doe: 'https://www.schools.nyc.gov/schools/X445',
+        transit: 'Tren: B · D hasta Bedford Park Blvd-Lehman College; 4 hasta Bedford Park Blvd\nBus: Bx10, Bx28',
         desc: [
           'El Bronx High School of Science es una de las escuelas secundarias más prestigiosas del país. Ha producido 8 ex-alumnos ganadores del Premio Nobel — más que muchas universidades — y decenas de ganadores de las becas más competitivas del país.',
           'El currículo está centrado en las ciencias naturales, la investigación, y las matemáticas avanzadas. Los estudiantes tienen acceso a laboratorios de investigación reales y pueden participar en competencias científicas nacionales e internacionales.',
@@ -314,6 +330,7 @@
         borough: 'Brooklyn',
         image: 'images/brooklyn-tech.jpg',
         doe: 'https://www.schools.nyc.gov/schools/K430',
+        transit: 'Tren: 2 · 3 · 4 · 5 hasta Nevins St; B · Q · R hasta DeKalb Ave; G hasta Fulton St\nBus: B25, B26, B38, B41, B52, B57, B61, B65',
         desc: [
           'Con más de 6,000 estudiantes, Brooklyn Technical High School es la más grande de las ocho escuelas especializadas y también una de las más diversas. Su tamaño es una ventaja: ofrece una amplísima variedad de programas especializados.',
           'Los estudiantes pueden especializarse en ingeniería, arquitectura, biología molecular, tecnología de la información, diseño gráfico, y muchas otras áreas. Brooklyn Tech también tiene el puntaje de corte más accesible entre las tres grandes especializadas (Stuyvesant, Bronx Science, Brooklyn Tech).',
@@ -328,6 +345,7 @@
         borough: 'Staten Island',
         image: 'images/staten-island-tech.jpg',
         doe: 'https://www.schools.nyc.gov/schools/R605',
+        transit: 'Staten Island Railway (SIR): hasta New Dorp Station\nBus: S74, S79 (exprés desde Brooklyn)\nFerry: Staten Island Ferry desde Manhattan, luego SIR',
         desc: [
           'La única escuela especializada de Staten Island, con aproximadamente 1,400 estudiantes, es pequeña, altamente competitiva, y profundamente enfocada en ciencias, matemáticas, y tecnología.',
           'El tamaño reducido de la escuela es uno de sus mayores atractivos: permite relaciones más cercanas entre estudiantes y maestros, un ambiente colaborativo y familiar, y una atención académica más individualizada que en las escuelas más grandes.',
@@ -342,6 +360,7 @@
         borough: 'El Bronx',
         image: 'images/lehman.jpg',
         doe: 'https://www.schools.nyc.gov/schools/X696',
+        transit: 'Tren: B · D · 4 hasta Bedford Park Blvd-Lehman College\nBus: Bx10, Bx26, Bx28, Bx34',
         desc: [
           'La única de las ocho escuelas especializadas enfocada en humanidades y ciencias sociales en lugar de ciencias y matemáticas. Es ideal para estudiantes apasionados por la historia, la política, el derecho, el periodismo, o las ciencias sociales.',
           'Ubicada en el campus de Lehman College (CUNY) en el Bronx, los estudiantes tienen acceso a recursos universitarios desde la escuela secundaria: bibliotecas, laboratorios de idiomas, y el ambiente académico de una universidad real.',
@@ -356,6 +375,7 @@
         borough: 'Queens',
         image: 'images/queens-science.jpg',
         doe: 'https://www.schools.nyc.gov/schools/Q687',
+        transit: 'Tren: E · J · Z hasta Jamaica Center-Parsons/Archer; LIRR hasta Jamaica\nBus: Q4, Q5, Q8, Q24, Q25, Q41, Q43, Q44, Q56, Q83',
         desc: [
           'Ubicada en el campus de York College (CUNY) en Jamaica, Queens, esta escuela ofrece una experiencia única: los estudiantes asisten a clases en un campus universitario real, con acceso a laboratorios, recursos, y el ambiente académico de York College.',
           'El currículo está enfocado en ciencias avanzadas, matemáticas, y biología. Los estudiantes pueden tomar cursos universitarios a través de York College, acumulando créditos universitarios antes de graduarse de la secundaria.',
@@ -370,6 +390,7 @@
         borough: 'Manhattan',
         image: 'images/ccny.jpg',
         doe: 'https://www.schools.nyc.gov/schools/M692',
+        transit: 'Tren: A · B · C · D hasta 145th St; 1 hasta 137th St-City College\nBus: M100, M101, Bx19',
         desc: [
           'Ubicada en el campus histórico de City College of New York (CUNY) en Harlem, Manhattan, esta escuela ofrece un currículo intenso en ingeniería, matemáticas aplicadas, y ciencias de la computación.',
           'La ubicación en el campus de CCNY es una ventaja enorme: los estudiantes están rodeados de ingenieros, científicos, y arquitectos universitarios desde el primer día, con acceso a laboratorios de ingeniería de nivel universitario.',
@@ -384,6 +405,7 @@
         borough: 'Brooklyn',
         image: 'images/brooklyn-latin.jpg',
         doe: 'https://www.schools.nyc.gov/schools/K497',
+        transit: 'Tren: J · M · Z hasta Myrtle Ave o Kosciuszko St; L hasta DeKalb Ave\nBus: B13, B54, B60',
         desc: [
           'La Brooklyn Latin School tiene el puntaje de corte más accesible de las ocho escuelas especializadas, lo que la convierte en una puerta de entrada especialmente valiosa. Pero no confundas "puntaje de corte más bajo" con "fácil" — sigue siendo una escuela altamente exigente y de élite.',
           'Su currículo es único: inspirado en las escuelas clásicas europeas, incluye el estudio del latín como parte central del programa. Los estudiantes aprenden pensamiento crítico, retórica, y escritura analítica a través de textos clásicos y filosofía occidental.',
@@ -393,12 +415,13 @@
     ];
 
     const stage    = document.getElementById('school-stage');
-    const img      = document.getElementById('school-img');
-    const borough  = document.getElementById('school-borough');
-    const name     = document.getElementById('school-name');
-    const desc     = document.getElementById('school-desc');
-    const doeLink  = document.getElementById('school-doe-link');
-    const navGrid  = document.getElementById('school-nav-grid');
+    const img          = document.getElementById('school-img');
+    const borough      = document.getElementById('school-borough');
+    const name         = document.getElementById('school-name');
+    const desc         = document.getElementById('school-desc');
+    const transitText  = document.getElementById('school-transit-text');
+    const doeLink      = document.getElementById('school-doe-link');
+    const navGrid      = document.getElementById('school-nav-grid');
 
     // Build navigation grid
     SCHOOLS.forEach(function (s) {
@@ -426,6 +449,7 @@
         borough.textContent = school.borough;
         name.textContent = school.name;
         desc.innerHTML = school.desc.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+        transitText.innerHTML = school.transit.replace(/\n/g, '<br>');
         doeLink.href = school.doe;
 
         // Update nav active state
