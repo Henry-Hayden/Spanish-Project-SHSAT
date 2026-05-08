@@ -241,6 +241,35 @@ ul { list-style: none; }
   max-width: 580px;
 }
 
+/* ── Homepage: full-bleed photo hero ── */
+.hero--photo {
+  background-image:
+    linear-gradient(100deg,
+      rgba(15,79,71,0.97) 0%,
+      rgba(15,79,71,0.91) 38%,
+      rgba(15,79,71,0.55) 60%,
+      rgba(15,79,71,0.14) 100%),
+    url('../images/stuyvesant.jpg');
+  background-size: cover;
+  background-position: center 22%;
+  min-height: calc(84vh - 68px);
+  display: flex;
+  align-items: center;
+  padding: 5rem 0;
+}
+.hero--photo::before { display: none; }
+.hero--photo .hero__content { max-width: 600px; }
+
+@media (max-width: 820px) {
+  .hero--photo {
+    background-image:
+      linear-gradient(180deg, rgba(15,79,71,0.95) 0%, rgba(15,79,71,0.92) 100%),
+      url('../images/stuyvesant.jpg');
+    min-height: auto;
+    padding: 4rem 0 3.5rem;
+  }
+}
+
 /* ============================================================
    STAT BLOCK
    ============================================================ */
