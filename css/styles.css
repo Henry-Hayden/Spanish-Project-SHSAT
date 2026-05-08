@@ -308,9 +308,17 @@ ul { list-style: none; }
   border-radius: var(--radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
-  transition: transform 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+  color: inherit;
+  text-decoration: none;
 }
-.school-card:hover { transform: translateY(-3px); }
+.school-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(27,122,110,0.15);
+  text-decoration: none;
+  color: inherit;
+}
 
 .school-card h3 {
   font-family: 'Playfair Display', serif;
@@ -481,6 +489,16 @@ ul { list-style: none; }
   display: flex;
   gap: 1.5rem;
   align-items: flex-start;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+a.school-detail-card:hover {
+  border-color: var(--teal);
+  box-shadow: 0 6px 20px rgba(27,122,110,0.13);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: inherit;
 }
 
 .school-detail-card__num {

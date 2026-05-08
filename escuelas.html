@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Las 8 Escuelas Especializadas — SHSAT: Tu Guía en Español</title>
+  <meta name="description" content="Conoce en detalle las 8 escuelas secundarias especializadas de Nueva York: Stuyvesant, Bronx Science, Brooklyn Tech, y más." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── School stage: full-viewport 50/50 split ── */
+    .school-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 68px);
+      transition: opacity 0.22s ease;
+    }
+
+    .school-image-side {
+      position: sticky;
+      top: 68px;
+      height: calc(100vh - 68px);
+      overflow: hidden;
+      background: var(--teal-dark);
+      flex-shrink: 0;
+    }
+
+    .school-image-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .school-info-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3.5rem 4rem 3.5rem 3.5rem;
+      background: var(--white);
+      overflow-y: auto;
+    }
+
+    .school-info-side .borough {
+      display: inline-block;
+      background: var(--teal-light);
+      color: var(--teal);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.7rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .school-info-side h1 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--teal-dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .school-info-desc p {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .school-info-desc p:last-child { margin-bottom: 0; }
+
+    .school-doe-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--teal);
+      border: 2px solid var(--teal);
+      border-radius: var(--radius);
+      padding: 0.6rem 1.25rem;
+      width: fit-content;
+      transition: background 0.15s, color 0.15s;
+    }
+    .school-doe-link:hover {
+      background: var(--teal);
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    /* ── School navigation grid ── */
+    .school-nav-section {
+      background: var(--teal-light);
+      border-top: 2px solid var(--border);
+      padding: 2.5rem 0 3rem;
+    }
+
+    .school-nav-section h2 {
+      font-size: 1rem;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+
+    .school-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+
+    .school-nav-btn {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Source Sans 3', sans-serif;
+      transition: border-color 0.15s, background 0.15s, color 0.15s, transform 0.1s;
+    }
+
+    .school-nav-btn:hover:not(.active) {
+      border-color: var(--teal);
+      background: var(--teal-light);
+      transform: translateY(-2px);
+    }
+
+    .school-nav-btn.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--white);
+    }
+
+    .school-nav-btn .nav-num {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      opacity: 0.6;
+      margin-bottom: 0.3rem;
+      color: var(--coral);
+    }
+    .school-nav-btn.active .nav-num { color: rgba(255,255,255,0.7); }
+
+    .school-nav-btn .nav-name {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--teal-dark);
+      line-height: 1.3;
+    }
+    .school-nav-btn.active .nav-name { color: var(--white); }
+
+    .school-nav-btn .nav-borough {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    .school-nav-btn.active .nav-borough { color: rgba(255,255,255,0.75); }
+
+    /* ── Mobile ── */
+    @media (max-width: 820px) {
+      .school-stage {
+        grid-template-columns: 1fr;
+        min-height: unset;
+      }
+      .school-image-side {
+        position: relative;
+        top: auto;
+        height: 55vw;
+        min-height: 220px;
+        max-height: 380px;
+      }
+      .school-info-side {
+        padding: 2.5rem 1.5rem;
+        min-height: unset;
+      }
+      .school-nav-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .school-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .school-nav-btn { padding: 0.75rem 0.85rem; }
+      .school-nav-btn .nav-name { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" role="navigation" aria-label="Navegación principal">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__brand">SHSAT: Tu Guía en Español</a>
+      <button class="nav__toggle" aria-expanded="false" aria-label="Abrir menú">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html"            class="nav__link">Inicio</a></li>
+        <li><a href="que-es-shsat.html"     class="nav__link">¿Qué es el SHSAT?</a></li>
+        <li><a href="como-registrarse.html" class="nav__link">Cómo Registrarse</a></li>
+        <li><a href="recursos.html"         class="nav__link">Recursos Gratuitos</a></li>
+        <li><a href="faq.html"              class="nav__link">Preguntas Frecuentes</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== SCHOOL STAGE ========== -->
+  <div class="school-stage" id="school-stage">
+    <div class="school-image-side">
+      <img id="school-img" src="" alt="" />
+    </div>
+    <div class="school-info-side">
+      <span class="borough" id="school-borough"></span>
+      <h1 id="school-name"></h1>
+      <div class="school-info-desc" id="school-desc"></div>
+      <a id="school-doe-link" href="#" target="_blank" rel="noopener noreferrer" class="school-doe-link">
+        Ver en el sitio del DOE &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- ========== SCHOOL NAVIGATION ========== -->
+  <section class="school-nav-section">
+    <div class="container">
+      <h2>Explorar todas las escuelas</h2>
+      <div class="school-nav-grid" id="school-nav-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__col">
+          <span class="footer__brand">SHSAT: Tu Guía en Español</span>
+          <p class="footer__tagline">Un recurso gratuito para familias hispanohablantes de Nueva York. Toda la información que necesitas sobre las escuelas secundarias especializadas, en tu idioma.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Páginas</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="que-es-shsat.html">¿Qué es el SHSAT?</a></li>
+            <li><a href="como-registrarse.html">Cómo Registrarse</a></li>
+            <li><a href="recursos.html">Recursos Gratuitos</a></li>
+            <li><a href="faq.html">Preguntas Frecuentes</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>¿Necesitas ayuda?</h4>
+          <div class="footer__help">
+            <p>Llama al Departamento de Educación de Nueva York:</p>
+            <p><strong>718-935-2009</strong><br>Lunes–viernes, 8am–6pm<br>Sábados y domingos, 9am–1pm</p>
+            <p style="margin-top:0.75rem;"><a href="https://www.schools.nyc.gov" target="_blank" rel="noopener noreferrer">schools.nyc.gov &rarr;</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        Este sitio es independiente y no está afiliado oficialmente con el Departamento de Educación de Nueva York. Toda la información proviene de fuentes oficiales del DOE.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const SCHOOLS = [
+      {
+        id: 'stuyvesant',
+        num: '01',
+        name: 'Stuyvesant High School',
+        short: 'Stuyvesant',
+        borough: 'Manhattan',
+        image: 'images/stuyvesant.jpg',
+        doe: 'https://www.schools.nyc.gov/schools/M475',
+        desc: [
+          'La más competitiva de las ocho escuelas especializadas de Nueva York, Stuyvesant es reconocida mundialmente por sus programas de ciencias, matemáticas, y tecnología. Ha graduado a más de 14 ganadores del Premio Nobel — un número que supera al de muchas universidades del mundo.',
+          'Cada año, el puntaje de corte de Stuyvesant es el más alto de todas las especializadas. Para los estudiantes que reciben una oferta, la escuela ofrece una experiencia académica sin igual: cientos de cursos Advanced Placement (AP), laboratorios de última generación, equipos de debate y olimpiadas matemáticas internacionales, y más de 200 clubes extracurriculares.',
+          'Ubicada en el bajo Manhattan, a pasos del World Trade Center, es fácilmente accesible desde toda la ciudad por transporte público.'
+        ]
+      },
+      {
+        id: 'bronx-science',
+        num: '02',
+        name: 'Bronx High School of Science',
+        short: 'Bronx Science',
+        borough: 'El Bronx',
+        image: 'images/bronx-science.jpg',
+        doe: 'https://www.schools.nyc.gov/schools/X445',
+        desc: [
+          'El Bronx High School of Science es una de las escuelas secundarias más prestigiosas del país. Ha producido 8 ex-alumnos ganadores del Premio Nobel — más que muchas universidades — y decenas de ganadores de las becas más competitivas del país.',
+          'El currículo está centrado en las ciencias naturales, la investigación, y las matemáticas avanzadas. Los estudiantes tienen acceso a laboratorios de investigación reales y pueden participar en competencias científicas nacionales e internacionales.',
+          'Ubicada en el noroeste del Bronx, es accesible desde muchos vecindarios de la ciudad y es la opción ideal para estudiantes con una verdadera pasión por las ciencias y la investigación.'
+        ]
+      },
+      {
+        id: 'brooklyn-tech',
+        num: '03',
+        name: 'Brooklyn Technical High School',
+        short: 'Brooklyn Tech',
+        borough: 'Brooklyn',
+        image: 'images/brooklyn-tech.jpg',
+        doe: 'https://www.schools.nyc.gov/schools/K430',
+        desc: [
+          'Con más de 6,000 estudiantes, Brooklyn Technical High School es la más grande de las ocho escuelas especializadas y también una de las más diversas. Su tamaño es una ventaja: ofrece una amplísima variedad de programas especializados.',
+          'Los estudiantes pueden especializarse en ingeniería, arquitectura, biología molecular, tecnología de la información, diseño gráfico, y muchas otras áreas. Brooklyn Tech también tiene el puntaje de corte más accesible entre las tres grandes especializadas (Stuyvesant, Bronx Science, Brooklyn Tech).',
+          'Ubicada en Fort Greene, Brooklyn, cerca del puente de Manhattan, es fácilmente accesible desde toda la ciudad. Es la opción perfecta para estudiantes con múltiples intereses que quieren explorar antes de decidir su camino profesional.'
+        ]
+      },
+      {
+        id: 'staten-island-tech',
+        num: '04',
+        name: 'Staten Island Technical High School',
+        short: 'Staten Island Tech',
+        borough: 'Staten Island',
+        image: 'images/staten-island-tech.jpg',
+        doe: 'https://www.schools.nyc.gov/schools/R605',
+        desc: [
+          'La única escuela especializada de Staten Island, con aproximadamente 1,400 estudiantes, es pequeña, altamente competitiva, y profundamente enfocada en ciencias, matemáticas, y tecnología.',
+          'El tamaño reducido de la escuela es uno de sus mayores atractivos: permite relaciones más cercanas entre estudiantes y maestros, un ambiente colaborativo y familiar, y una atención académica más individualizada que en las escuelas más grandes.',
+          'Para los estudiantes de Staten Island, esta escuela ofrece la oportunidad de una educación especializada de primer nivel sin necesidad de viajar a otros boroughs. Su nivel académico es completamente comparable al de las grandes especializadas.'
+        ]
+      },
+      {
+        id: 'lehman',
+        num: '05',
+        name: 'High School of American Studies at Lehman College',
+        short: 'American Studies',
+        borough: 'El Bronx',
+        image: 'images/lehman.jpg',
+        doe: 'https://www.schools.nyc.gov/schools/X696',
+        desc: [
+          'La única de las ocho escuelas especializadas enfocada en humanidades y ciencias sociales en lugar de ciencias y matemáticas. Es ideal para estudiantes apasionados por la historia, la política, el derecho, el periodismo, o las ciencias sociales.',
+          'Ubicada en el campus de Lehman College (CUNY) en el Bronx, los estudiantes tienen acceso a recursos universitarios desde la escuela secundaria: bibliotecas, laboratorios de idiomas, y el ambiente académico de una universidad real.',
+          'Con aproximadamente 400 estudiantes por clase, es una de las especializadas más pequeñas, lo que crea un ambiente íntimo y exigente. Es una excelente opción para estudiantes fuertes en escritura, lectura crítica, y análisis histórico.'
+        ]
+      },
+      {
+        id: 'queens-science',
+        num: '06',
+        name: 'Queens High School for the Sciences at York College',
+        short: 'Queens Sciences',
+        borough: 'Queens',
+        image: 'images/queens-science.jpg',
+        doe: 'https://www.schools.nyc.gov/schools/Q687',
+        desc: [
+          'Ubicada en el campus de York College (CUNY) en Jamaica, Queens, esta escuela ofrece una experiencia única: los estudiantes asisten a clases en un campus universitario real, con acceso a laboratorios, recursos, y el ambiente académico de York College.',
+          'El currículo está enfocado en ciencias avanzadas, matemáticas, y biología. Los estudiantes pueden tomar cursos universitarios a través de York College, acumulando créditos universitarios antes de graduarse de la secundaria.',
+          'Para los estudiantes de Queens, es una oportunidad de recibir una educación especializada de alto nivel sin salir del borough. Ideal para estudiantes que saben que quieren seguir una carrera en ciencias o medicina.'
+        ]
+      },
+      {
+        id: 'ccny',
+        num: '07',
+        name: 'High School for Mathematics, Science and Engineering at City College',
+        short: 'Math, Science & Eng.',
+        borough: 'Manhattan',
+        image: 'images/ccny.jpg',
+        doe: 'https://www.schools.nyc.gov/schools/M692',
+        desc: [
+          'Ubicada en el campus histórico de City College of New York (CUNY) en Harlem, Manhattan, esta escuela ofrece un currículo intenso en ingeniería, matemáticas aplicadas, y ciencias de la computación.',
+          'La ubicación en el campus de CCNY es una ventaja enorme: los estudiantes están rodeados de ingenieros, científicos, y arquitectos universitarios desde el primer día, con acceso a laboratorios de ingeniería de nivel universitario.',
+          'El vecindario de Harlem y Washington Heights la hace especialmente accesible para estudiantes del norte de Manhattan y el sur del Bronx. Es la opción ideal para quienes saben que quieren estudiar ingeniería o ciencias de la computación.'
+        ]
+      },
+      {
+        id: 'brooklyn-latin',
+        num: '08',
+        name: 'Brooklyn Latin School',
+        short: 'Brooklyn Latin',
+        borough: 'Brooklyn',
+        image: 'images/brooklyn-latin.jpg',
+        doe: 'https://www.schools.nyc.gov/schools/K497',
+        desc: [
+          'La Brooklyn Latin School tiene el puntaje de corte más accesible de las ocho escuelas especializadas, lo que la convierte en una puerta de entrada especialmente valiosa. Pero no confundas "puntaje de corte más bajo" con "fácil" — sigue siendo una escuela altamente exigente y de élite.',
+          'Su currículo es único: inspirado en las escuelas clásicas europeas, incluye el estudio del latín como parte central del programa. Los estudiantes aprenden pensamiento crítico, retórica, y escritura analítica a través de textos clásicos y filosofía occidental.',
+          'Este enfoque clásico prepara excepcionalmente bien a los estudiantes para las universidades más selectivas del país. Es una excelente opción para estudiantes reflexivos, apasionados por las ideas y la escritura. Ubicada en Bushwick, Brooklyn.'
+        ]
+      }
+    ];
+
+    const stage    = document.getElementById('school-stage');
+    const img      = document.getElementById('school-img');
+    const borough  = document.getElementById('school-borough');
+    const name     = document.getElementById('school-name');
+    const desc     = document.getElementById('school-desc');
+    const doeLink  = document.getElementById('school-doe-link');
+    const navGrid  = document.getElementById('school-nav-grid');
+
+    // Build navigation grid
+    SCHOOLS.forEach(function (s) {
+      const btn = document.createElement('button');
+      btn.className = 'school-nav-btn';
+      btn.dataset.school = s.id;
+      btn.innerHTML =
+        '<span class="nav-num">' + s.num + '</span>' +
+        '<span class="nav-name">' + s.short + '</span>' +
+        '<span class="nav-borough">' + s.borough + '</span>';
+      btn.addEventListener('click', function () { showSchool(s.id, true); });
+      navGrid.appendChild(btn);
+    });
+
+    function showSchool(id, scroll) {
+      const school = SCHOOLS.find(function (s) { return s.id === id; });
+      if (!school) return;
+
+      // Fade out
+      stage.style.opacity = '0';
+
+      setTimeout(function () {
+        img.src = school.image;
+        img.alt = school.name;
+        borough.textContent = school.borough;
+        name.textContent = school.name;
+        desc.innerHTML = school.desc.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+        doeLink.href = school.doe;
+
+        // Update nav active state
+        document.querySelectorAll('.school-nav-btn').forEach(function (btn) {
+          btn.classList.toggle('active', btn.dataset.school === id);
+        });
+
+        // Update URL hash without triggering a scroll
+        history.replaceState(null, '', '#' + id);
+
+        // Fade in
+        stage.style.opacity = '1';
+
+        // Scroll to top of content if triggered by nav click
+        if (scroll) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 200);
+    }
+
+    // Init: read hash from URL
+    const initId = window.location.hash.slice(1);
+    const valid  = SCHOOLS.some(function (s) { return s.id === initId; });
+    showSchool(valid ? initId : 'stuyvesant', false);
+  </script>
+</body>
+</html>
